@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{boardmodul.boardmodul_title}}{% endblock %}
+{% block content %}
+<h2>{{boardmodul.boardmodul_title}}</h2>
+<p>{{boardmodul.boardmodul_text}}</p>
+<em>{{boardmodul.pub_date}}</em>
+<hr>
+{% if latest_comments_list %}
+  {% for c in latest_comments_list %}
+    <p>
+      <strong>{{c.author_name}}</strong>
+      <p>{{c.comment_text}}</p>
+    </p>
+  {% endfor %}
+{% else %}
+Kein Kommentar gefunden!
+{% endif %}
+
+<hr>
+<form class="" action="{% url 'boardmodul:leave_comment' boardmodul.id %}" method="POST">
+  {% csrf_token %}
+  <input type="text" required placeholder="Ihre Nahme" name="name"><br>
+  <textarea name="text" required="" placeholder="Comment Text" rows="8" cols="80"></textarea><br>
+  <button type="submit">Comment Senden</button>
+</form>
+{% endblock %}

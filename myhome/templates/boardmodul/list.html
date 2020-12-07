@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Letze Module{% endblock %}
+{% block content %}
+    {% if latest_boardmodul_list %}
+
+      {% for a in latest_boardmodul_list %}
+        <a href="{% url 'boardmodul:detail' a.id %}">{{a.boardmodul_title}}</a>
+      {% endfor %}
+    {% else %}
+      Keinen Modul gefunden
+    {% endif %}
+
+{% endblock %}
